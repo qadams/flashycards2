@@ -23,10 +23,8 @@ easy_install pip
 pip install virtualenv
 export PYTHONUSERBASE=$HOME
 pip install--user virtualenv
-#Setup Virtual Environment
 virtualenv -p /usr/bin/python2.7 venv
 source venv/bin/activate
-#Install Django's core
 pip install django
 pip install djangorestframework
 pip install django-cors-headers
