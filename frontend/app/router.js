@@ -7,7 +7,8 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('userprofile');
+  // this.route('userprofile');
+  this.route('flashcard');
 });
 
 export default Router;

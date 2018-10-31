@@ -311,10 +311,25 @@
   });
 
   Router.map(function () {
-    this.route('userprofile');
+    // this.route('userprofile');
+    this.route('flashcard');
   });
 
   exports.default = Router;
+});
+;define('frontend/routes/flashcard', ['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = Ember.Route.extend({
+    store: Ember.inject.service(),
+    model() {
+      const store = this.get('store');
+      return store.findAll('flashcard');
+    }
+  });
 });
 ;define('frontend/routes/index', ['exports'], function (exports) {
   'use strict';
@@ -379,6 +394,14 @@
   });
   exports.default = Ember.HTMLBars.template({ "id": "FdWY4pHn", "block": "{\"symbols\":[],\"statements\":[[7,\"div\"],[11,\"class\",\"container\"],[9],[0,\"\\n  \"],[7,\"div\"],[11,\"class\",\"menu\"],[9],[0,\"\\n\"],[4,\"link-to\",[\"index\"],null,{\"statements\":[[0,\"      \"],[7,\"h1\"],[9],[0,\"\\n        \"],[7,\"em\"],[9],[0,\"Flashycards\"],[10],[0,\"\\n      \"],[10],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"  \"],[10],[0,\"\\n  \"],[7,\"div\"],[11,\"class\",\"body\"],[9],[0,\"\\n    \"],[1,[21,\"outlet\"],false],[0,\"\\n  \"],[10],[0,\"\\n\"],[10],[0,\"\\n\"]],\"hasEval\":false}", "meta": { "moduleName": "frontend/templates/application.hbs" } });
 });
+;define("frontend/templates/flashcard", ["exports"], function (exports) {
+  "use strict";
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = Ember.HTMLBars.template({ "id": "dvzIMDMI", "block": "{\"symbols\":[\"flashcard\"],\"statements\":[[7,\"div\"],[11,\"class\",\"flashcard-list\"],[9],[0,\"\\n\"],[4,\"each\",[[23,[\"model\"]]],null,{\"statements\":[[0,\"    \"],[7,\"div\"],[11,\"class\",\"flashcard\"],[9],[0,\"\\n      \"],[1,[22,1,[\"term\"]],false],[0,\"\\n    \"],[10],[0,\"\\n\"]],\"parameters\":[1]},null],[10],[0,\"\\n\"]],\"hasEval\":false}", "meta": { "moduleName": "frontend/templates/flashcard.hbs" } });
+});
 ;define("frontend/templates/index", ["exports"], function (exports) {
   "use strict";
 
@@ -418,7 +441,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("frontend/app")["default"].create({"name":"frontend","version":"0.0.0+1727c5eb","API_HOST":"http://localhost:8000","API_NAMESPACE":"api","API_ADD_TRAILING_SLASHES":true});
+            require("frontend/app")["default"].create({"name":"frontend","version":"0.0.0+5ea0c6c2","API_HOST":"http://localhost:8000","API_NAMESPACE":"api","API_ADD_TRAILING_SLASHES":true});
           }
         
 //# sourceMappingURL=frontend.map

@@ -4629,6 +4629,11 @@ define('frontend/tests/lint/app.lint-test', [], function () {
     assert.ok(true, 'router.js should pass ESLint\n\n');
   });
 
+  QUnit.test('routes/flashcard.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'routes/flashcard.js should pass ESLint\n\n');
+  });
+
   QUnit.test('routes/index.js', function (assert) {
     assert.expect(1);
     assert.ok(true, 'routes/index.js should pass ESLint\n\n');
@@ -4649,6 +4654,11 @@ define('frontend/tests/lint/templates.template.lint-test', [], function () {
     assert.ok(true, 'frontend/templates/application.hbs should pass TemplateLint.\n\n');
   });
 
+  QUnit.test('frontend/templates/flashcard.hbs', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'frontend/templates/flashcard.hbs should pass TemplateLint.\n\n');
+  });
+
   QUnit.test('frontend/templates/index.hbs', function (assert) {
     assert.expect(1);
     assert.ok(true, 'frontend/templates/index.hbs should pass TemplateLint.\n\n');
@@ -4667,6 +4677,11 @@ define('frontend/tests/lint/tests.lint-test', [], function () {
   QUnit.test('test-helper.js', function (assert) {
     assert.expect(1);
     assert.ok(true, 'test-helper.js should pass ESLint\n\n');
+  });
+
+  QUnit.test('unit/routes/flashcard-test.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/routes/flashcard-test.js should pass ESLint\n\n');
   });
 
   QUnit.test('unit/routes/index-test.js', function (assert) {
@@ -4702,6 +4717,18 @@ define('frontend/tests/test-helper', ['frontend/app', 'frontend/config/environme
   (0, _testHelpers.setApplication)(_app.default.create(_environment.default.APP));
 
   (0, _emberQunit.start)();
+});
+define('frontend/tests/unit/routes/flashcard-test', ['qunit', 'ember-qunit'], function (_qunit, _emberQunit) {
+  'use strict';
+
+  (0, _qunit.module)('Unit | Route | flashcard', function (hooks) {
+    (0, _emberQunit.setupTest)(hooks);
+
+    (0, _qunit.test)('it exists', function (assert) {
+      let route = this.owner.lookup('route:flashcard');
+      assert.ok(route);
+    });
+  });
 });
 define('frontend/tests/unit/routes/index-test', ['qunit', 'ember-qunit'], function (_qunit, _emberQunit) {
   'use strict';
