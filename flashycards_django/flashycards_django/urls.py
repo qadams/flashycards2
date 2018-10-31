@@ -19,6 +19,7 @@ from django.contrib import admin
 from rest_framework import routers
 from flashycards.views import FlashcardViewSet
 from flashycards.views import DeckViewSet
+from django.views.decorators.csrf import csrf_exempt
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register("flashcard", FlashcardViewSet)

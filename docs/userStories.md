@@ -81,8 +81,8 @@
 7. Scenario: Access cards and start studying using flashchard deck
 
 * Must be on proper website
-* Must be registered user who is logged in 
-* User is on their user page 
+* Must be registered user who is logged in
+* User is on their user page
 * User has an available deck that has been created
 * User clicks on available deck
 * User can iterate through cards
@@ -91,8 +91,8 @@
 8. Scenario: Click on  pencil icon next to Astronomy Flashcards to edit Flashcards
 
 * Must be on proper website
-* Must be registered user who is logged in 
-* User is on their user page 
+* Must be registered user who is logged in
+* User is on their user page
 * User has an available deck that has been created
 * User hovers on available deck
 * User sees the trash and pencil icons
@@ -117,8 +117,8 @@
 10. Scenario: Remove a flashcard deck successfully
 
 * Must be on proper website
-* Must be registered user who is logged in 
-* User is on their user page 
+* Must be registered user who is logged in
+* User is on their user page
 * User has an available deck that has been created
 * User hovers on available deck
 * User sees the trash and pencil icons
@@ -146,7 +146,7 @@
 3. As a **disgruntled registered user**, I want to **perform a SQL injection** so I can **grab user credentials from the data store**.
 4. As a **disgruntled registered user**, I want to **brute force login credentials** so I can **login to an account that isn't mine**.
 
-# Mitigation Techniques 
+# Mitigation Techniques
 
 1. As a **disgruntled registered user**, I want to **flood the web server with login attempts** so I can **overload the web server so it goes down**.
 
@@ -156,12 +156,12 @@
 2. As a **disgruntled registered user**, I want to **enter data in between script tags** so I can **break the website's functionality**.
 
 * Mitigation: In code, add Google's protection dependency against this
-* Mitigation: In code, add methods that make sure this can't be done 
+* Mitigation: In code, add methods that make sure this can't be done
 
 3. As a **disgruntled registered user**, I want to **perform a SQL injection** so I can **grab user credentials from the database**.
 
 * Mitigation: In code, add Google's protection dependency against this
-* Mitigation: In code, add methods that make sure this can't be done 
+* Mitigation: In code, add methods that make sure this can't be done
 
 4. As a **disgruntled registered user**, I want to **brute force login credentials** so I can **login to an account that isn't mine**.
 
@@ -201,5 +201,6 @@ All these mockups are tied to some user story one way or the other. They are all
 
 ### Level 3: Components
 
-![]()
+As of right now, I am not exactly sure what components I will be using in my website as I have been making durastic changes on how my website functions.
 
+![](pictures/componentsArch.png)
