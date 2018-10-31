@@ -35,7 +35,6 @@ pip install djangorestframework-jsonapi==2.0.0-beta.2
 In order to run FlashyCards app,
 ```bash
 #In frontend directory
-ember build
 ember s 
 #In Django project directory
 python manage.py runserver

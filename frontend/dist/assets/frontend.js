@@ -2,6 +2,35 @@
 
 
 
+;define('frontend/adapters/application', ['exports', 'ember-data'], function (exports, _emberData) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = _emberData.default.RESTAdapter.extend({
+    host: Ember.computed(function () {
+      return 'http://localhost:8000';
+    }),
+    namespace: 'api'
+  });
+});
+;define('frontend/adapters/drf', ['exports', 'ember-django-adapter/adapters/drf', 'frontend/config/environment'], function (exports, _drf, _environment) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = _drf.default.extend({
+    host: Ember.computed(function () {
+      return _environment.default.APP.API_HOST;
+    }),
+
+    namespace: Ember.computed(function () {
+      return _environment.default.APP.API_NAMESPACE;
+    })
+  });
+});
 ;define('frontend/app', ['exports', 'frontend/resolver', 'ember-load-initializers', 'frontend/config/environment'], function (exports, _resolver, _emberLoadInitializers, _environment) {
   'use strict';
 
@@ -121,6 +150,18 @@
     }
   };
 });
+;define('frontend/initializers/data-adapter', ['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = {
+    name: 'data-adapter',
+    before: 'store',
+    initialize() {}
+  };
+});
 ;define('frontend/initializers/ember-data', ['exports', 'ember-data/setup-container', 'ember-data'], function (exports, _setupContainer) {
   'use strict';
 
@@ -182,16 +223,71 @@
     initialize: initialize
   };
 });
-;define('frontend/instance-initializers/ember-data', ['exports', 'ember-data/initialize-store-service'], function (exports, _initializeStoreService) {
+;define('frontend/initializers/injectStore', ['exports'], function (exports) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
   exports.default = {
-    name: 'ember-data',
+    name: 'injectStore',
+    before: 'store',
+    initialize() {}
+  };
+});
+;define('frontend/initializers/store', ['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = {
+    name: 'store',
+    after: 'ember-data',
+    initialize() {}
+  };
+});
+;define('frontend/initializers/transforms', ['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = {
+    name: 'transforms',
+    before: 'store',
+    initialize() {}
+  };
+});
+;define("frontend/instance-initializers/ember-data", ["exports", "ember-data/initialize-store-service"], function (exports, _initializeStoreService) {
+  "use strict";
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = {
+    name: "ember-data",
     initialize: _initializeStoreService.default
   };
+});
+;define('frontend/models/deck', ['exports', 'ember-data'], function (exports, _emberData) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = _emberData.default.Model.extend({});
+});
+;define('frontend/models/flashcard', ['exports', 'ember-data'], function (exports, _emberData) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = _emberData.default.Model.extend({
+    term: _emberData.default.attr(),
+    defintion: _emberData.default.attr()
+  });
 });
 ;define('frontend/resolver', ['exports', 'ember-resolver'], function (exports, _emberResolver) {
   'use strict';
@@ -233,14 +329,34 @@
   });
 });
 ;define('frontend/routes/userprofile', ['exports'], function (exports) {
-    'use strict';
+  'use strict';
 
-    Object.defineProperty(exports, "__esModule", {
-        value: true
-    });
-    exports.default = Ember.Route.extend({
-        model() {}
-    });
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = Ember.Route.extend({
+    store: Ember.inject.service(),
+    model() {
+      const store = this.get('store');
+      return store.findAll('flashcard');
+    }
+  });
+});
+;define('frontend/serializers/application', ['exports', 'frontend/serializers/drf'], function (exports, _drf) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = _drf.default;
+});
+;define('frontend/serializers/drf', ['exports', 'ember-django-adapter/serializers/drf'], function (exports, _drf) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = _drf.default;
 });
 ;define('frontend/services/ajax', ['exports', 'ember-ajax/services/ajax'], function (exports, _ajax) {
   'use strict';
@@ -277,7 +393,7 @@
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = Ember.HTMLBars.template({ "id": "nFBhI6QW", "block": "{\"symbols\":[],\"statements\":[[0,\"\\n\"]],\"hasEval\":false}", "meta": { "moduleName": "frontend/templates/userprofile.hbs" } });
+  exports.default = Ember.HTMLBars.template({ "id": "mJMIVmkJ", "block": "{\"symbols\":[\"flashcard\"],\"statements\":[[7,\"div\"],[11,\"class\",\"flashcard-list\"],[9],[0,\"\\n\"],[4,\"each\",[[23,[\"model\"]]],null,{\"statements\":[[0,\"    \"],[7,\"div\"],[11,\"class\",\"flashcard\"],[9],[0,\"\\n      \"],[1,[22,1,[\"term\"]],false],[0,\"\\n    \"],[10],[0,\"\\n\"]],\"parameters\":[1]},null],[10],[0,\"\\n\"]],\"hasEval\":false}", "meta": { "moduleName": "frontend/templates/userprofile.hbs" } });
 });
 ;
 
@@ -302,7 +418,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("frontend/app")["default"].create({"name":"frontend","version":"0.0.0+e1f92789"});
+            require("frontend/app")["default"].create({"name":"frontend","version":"0.0.0+1727c5eb","API_HOST":"http://localhost:8000","API_NAMESPACE":"api","API_ADD_TRAILING_SLASHES":true});
           }
         
 //# sourceMappingURL=frontend.map

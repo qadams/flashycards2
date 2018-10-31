@@ -4599,9 +4599,24 @@ define('frontend/tests/lint/app.lint-test', [], function () {
 
   QUnit.module('ESLint | app');
 
+  QUnit.test('adapters/application.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'adapters/application.js should pass ESLint\n\n');
+  });
+
   QUnit.test('app.js', function (assert) {
     assert.expect(1);
     assert.ok(true, 'app.js should pass ESLint\n\n');
+  });
+
+  QUnit.test('models/deck.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'models/deck.js should pass ESLint\n\n');
+  });
+
+  QUnit.test('models/flashcard.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'models/flashcard.js should pass ESLint\n\n');
   });
 
   QUnit.test('resolver.js', function (assert) {
