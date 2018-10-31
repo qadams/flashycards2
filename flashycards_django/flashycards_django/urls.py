@@ -18,9 +18,11 @@ from django.contrib import admin
 
 from rest_framework import routers
 from flashycards.views import FlashcardViewSet
+from flashycards.views import DeckViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register("flashcard", FlashcardViewSet)
+router.register("deck", DeckViewSet)
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),
