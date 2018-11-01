@@ -441,7 +441,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("frontend/app")["default"].create({"name":"frontend","version":"0.0.0+5ea0c6c2","API_HOST":"http://localhost:8000","API_NAMESPACE":"api","API_ADD_TRAILING_SLASHES":true});
+            require("frontend/app")["default"].create({"name":"frontend","version":"0.0.0+54ac57aa","API_HOST":"http://localhost:8000","API_NAMESPACE":"api","API_ADD_TRAILING_SLASHES":true});
           }
         
 //# sourceMappingURL=frontend.map
