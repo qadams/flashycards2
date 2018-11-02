@@ -276,7 +276,10 @@
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = _emberData.default.Model.extend({});
+  exports.default = _emberData.default.Model.extend({
+    term: _emberData.default.attr(),
+    defintion: _emberData.default.attr()
+  });
 });
 ;define('frontend/models/flashcard', ['exports', 'ember-data'], function (exports, _emberData) {
   'use strict';
@@ -316,6 +319,18 @@
   });
 
   exports.default = Router;
+});
+;define('frontend/routes/application', ['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = Ember.Route.extend({
+    redirect() {
+      this.transitionTo('userprofile');
+    }
+  });
 });
 ;define('frontend/routes/flashcard', ['exports'], function (exports) {
   'use strict';
@@ -441,7 +456,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("frontend/app")["default"].create({"name":"frontend","version":"0.0.0+54ac57aa","API_HOST":"http://localhost:8000","API_NAMESPACE":"api","API_ADD_TRAILING_SLASHES":true});
+            require("frontend/app")["default"].create({"name":"frontend","version":"0.0.0+74f76d33","API_HOST":"http://localhost:8000","API_NAMESPACE":"api","API_ADD_TRAILING_SLASHES":true});
           }
         
 //# sourceMappingURL=frontend.map
