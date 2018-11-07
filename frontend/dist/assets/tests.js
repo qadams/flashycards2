@@ -4609,6 +4609,31 @@ define('frontend/tests/lint/app.lint-test', [], function () {
     assert.ok(true, 'app.js should pass ESLint\n\n');
   });
 
+  QUnit.test('components/application.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'components/application.js should pass ESLint\n\n');
+  });
+
+  QUnit.test('components/index.js', function (assert) {
+    assert.expect(1);
+    assert.ok(false, 'components/index.js should pass ESLint\n\n3:16 - Use import Controller from \'@ember/controller\'; instead of using Ember.Controller (ember/new-module-imports)');
+  });
+
+  QUnit.test('components/login.js', function (assert) {
+    assert.expect(1);
+    assert.ok(false, 'components/login.js should pass ESLint\n\n3:16 - Use import Controller from \'@ember/controller\'; instead of using Ember.Controller (ember/new-module-imports)\n4:8 - Use import { inject } from \'@ember/service\'; instead of using Ember.inject.service (ember/new-module-imports)');
+  });
+
+  QUnit.test('initializers/auth-manager.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'initializers/auth-manager.js should pass ESLint\n\n');
+  });
+
+  QUnit.test('initializers/constants.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'initializers/constants.js should pass ESLint\n\n');
+  });
+
   QUnit.test('models/deck.js', function (assert) {
     assert.expect(1);
     assert.ok(true, 'models/deck.js should pass ESLint\n\n');
@@ -4684,6 +4709,16 @@ define('frontend/tests/lint/tests.lint-test', [], function () {
     assert.ok(true, 'test-helper.js should pass ESLint\n\n');
   });
 
+  QUnit.test('unit/initializers/auth-manager.js-test.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/initializers/auth-manager.js-test.js should pass ESLint\n\n');
+  });
+
+  QUnit.test('unit/initializers/constants.js-test.js', function (assert) {
+    assert.expect(1);
+    assert.ok(true, 'unit/initializers/constants.js-test.js should pass ESLint\n\n');
+  });
+
   QUnit.test('unit/routes/application-test.js', function (assert) {
     assert.expect(1);
     assert.ok(true, 'unit/routes/application-test.js should pass ESLint\n\n');
@@ -4727,6 +4762,62 @@ define('frontend/tests/test-helper', ['frontend/app', 'frontend/config/environme
   (0, _testHelpers.setApplication)(_app.default.create(_environment.default.APP));
 
   (0, _emberQunit.start)();
+});
+define('frontend/tests/unit/initializers/auth-manager.js-test', ['flashycards/initializers/auth-manager.js', 'qunit', 'ember-qunit'], function (_authManager, _qunit, _emberQunit) {
+  'use strict';
+
+  (0, _qunit.module)('Unit | Initializer | auth-manager.js', function (hooks) {
+    (0, _emberQunit.setupTest)(hooks);
+
+    hooks.beforeEach(function () {
+      this.TestApplication = Ember.Application.extend();
+      this.TestApplication.initializer({
+        name: 'initializer under test',
+        initialize: _authManager.initialize
+      });
+
+      this.application = this.TestApplication.create({ autoboot: false });
+    });
+
+    hooks.afterEach(function () {
+      Ember.run(this.application, 'destroy');
+    });
+
+    // Replace this with your real tests.
+    (0, _qunit.test)('it works', async function (assert) {
+      await this.application.boot();
+
+      assert.ok(true);
+    });
+  });
+});
+define('frontend/tests/unit/initializers/constants.js-test', ['flashycards/initializers/constants.js', 'qunit', 'ember-qunit'], function (_constants, _qunit, _emberQunit) {
+  'use strict';
+
+  (0, _qunit.module)('Unit | Initializer | constants.js', function (hooks) {
+    (0, _emberQunit.setupTest)(hooks);
+
+    hooks.beforeEach(function () {
+      this.TestApplication = Ember.Application.extend();
+      this.TestApplication.initializer({
+        name: 'initializer under test',
+        initialize: _constants.initialize
+      });
+
+      this.application = this.TestApplication.create({ autoboot: false });
+    });
+
+    hooks.afterEach(function () {
+      Ember.run(this.application, 'destroy');
+    });
+
+    // Replace this with your real tests.
+    (0, _qunit.test)('it works', async function (assert) {
+      await this.application.boot();
+
+      assert.ok(true);
+    });
+  });
 });
 define('frontend/tests/unit/routes/application-test', ['qunit', 'ember-qunit'], function (_qunit, _emberQunit) {
   'use strict';
@@ -4776,8 +4867,8 @@ define('frontend/tests/unit/routes/userprofile-test', ['qunit', 'ember-qunit'], 
     });
   });
 });
-define('frontend/config/environment', [], function() {
-  var prefix = 'frontend';
+define('flashycards/config/environment', [], function() {
+  var prefix = 'flashycards';
 try {
   var metaName = prefix + '/config/environment';
   var rawConfig = document.querySelector('meta[name="' + metaName + '"]').getAttribute('content');

@@ -8,10 +8,7 @@
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.default = _emberData.default.RESTAdapter.extend({
-    host: Ember.computed(function () {
-      return 'http://localhost:8000';
-    }),
+  exports.default = _emberData.default.JSONAPIAdapter.extend({
     namespace: 'api'
   });
 });
@@ -48,6 +45,83 @@
   (0, _emberLoadInitializers.default)(App, _environment.default.modulePrefix);
 
   exports.default = App;
+});
+;/*import Ember from 'ember';
+
+export default Ember.Controller.extend({
+  showMenu: '',
+  actions: {
+    toggleMenu(){
+      if (this.get('showMenu')){
+        this.set('showMenu', '');
+      }
+      else{
+        this.set('showMenu', 'active');
+      }
+
+    },
+    logout(){
+      this.get('auth').logout();
+    },
+    activateIFTTT(){
+      var data = {
+        eventtype: 'dashboard_on',
+        timestamp: Date.now().toString(),
+        userid: this.get('auth.userid')
+      };
+
+      Ember.$.ajax({
+        url:'/api/activateifttt',
+        type:"POST",
+        data: JSON.stringify(data),
+        contentType:"application/json",
+        dataType:"json",
+        success: function(response){
+          console.log('Attempting to turn ifttt on. Response from server is: ');
+          console.log(response);
+        }
+      });
+    },
+    createNew(){
+      var newevent = this.store.createRecord('event', {
+        eventtype: 2,
+        requestor: '1.1.1.1',
+        timestamp: new Date(),
+        userid: 1,
+      });
+      newevent.save();
+    }
+  }
+});
+*/
+define("frontend/components/application", [], function () {
+  "use strict";
+});
+;define('frontend/components/index', ['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = Ember.Controller.extend({});
+});
+;define('frontend/components/login', ['exports'], function (exports) {
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.default = Ember.Controller.extend({
+		auth: Ember.inject.service('auth-manager'),
+		actions: {
+			login: function () {
+				this.get('auth').login();
+			},
+			logout: function () {
+				this.get('auth').logout();
+			}
+		}
+	});
 });
 ;define('frontend/components/welcome-page', ['exports', 'ember-welcome-page/components/welcome-page'], function (exports, _welcomePage) {
   'use strict';
@@ -131,6 +205,40 @@
   exports.default = {
     name: 'App Version',
     initialize: (0, _initializerFactory.default)(name, version)
+  };
+});
+;define('frontend/initializers/auth-manager', ['exports'], function (exports) {
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.initialize = initialize;
+	function initialize(application) {
+		application.inject('route', 'auth', 'service:auth-manager');
+		application.inject('controller', 'auth', 'service:auth-manager');
+		application.inject('component', 'auth', 'service:auth-manager');
+	}
+
+	exports.default = {
+		name: 'auth-manager',
+		initialize: initialize
+	};
+});
+;define('frontend/initializers/constants', ['exports'], function (exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.initialize = initialize;
+  function initialize(application) {
+    application.inject('controller', 'constants', 'service:constants');
+  }
+
+  exports.default = {
+    name: 'constants',
+    initialize
   };
 });
 ;define('frontend/initializers/container-debug-adapter', ['exports', 'ember-resolver/resolvers/classic/container-debug-adapter'], function (exports, _containerDebugAdapter) {
